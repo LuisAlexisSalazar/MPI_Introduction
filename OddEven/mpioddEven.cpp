@@ -1,4 +1,8 @@
+// *Compilar
 // mpiCC -g -o main mpioddEven.cpp
+// ?Index determina cuantos elementos de la lista queires tener [200,400,800,1600,3200]
+// *Ejecución
+// mpiexec -n <p> main <index> 
 // mpiexec -n 2 main 0
 
 #include <stdio.h>
@@ -13,7 +17,7 @@ using namespace std;
 
 int limit_l = 1;
 int limit_r = 10000;
-// int limit_r = 100;
+
 int n_elements[5] = {200, 400, 800, 1600, 3200};
 int index_n;
 random_device rd;
@@ -121,7 +125,7 @@ void Merge_high(int local_A[], int temp_B[], int temp_C[], int local_n)
    }
 
    memcpy(local_A, temp_C, local_n * sizeof(int));
-} /* Merge_high */
+} 
 
 // Uniendo los valores menores
 void Merge_low(int my_keys[], int recv_keys[], int temp_keys[], int local_n)
@@ -146,7 +150,7 @@ void Merge_low(int my_keys[], int recv_keys[], int temp_keys[], int local_n)
    }
 
    memcpy(my_keys, temp_keys, local_n * sizeof(int));
-} /* Merge_low */
+} 
 
 void Odd_even_iter(int local_A[], int temp_B[], int temp_C[], int local_n, int phase, int even_partner, int odd_partner, int my_rank, int p, MPI_Comm comm)
 {
@@ -177,16 +181,15 @@ void Odd_even_iter(int local_A[], int temp_B[], int temp_C[], int local_n, int p
             Merge_high(local_A, temp_B, temp_C, local_n);
       }
    }
-} /* Odd_even_iter */
+}
 
 void Sort(int local_A[], int local_n, int my_rank, int p, MPI_Comm comm)
 {
    int phase;
    int *temp_B, *temp_C;
-   int even_partner; /* phase is even or left-looking */
-   int odd_partner;  /* phase is odd or right-looking */
+   int even_partner; 
+   int odd_partner;  
 
-   /* Temporary storage used in merge-split */
    temp_B = new int[local_n];
    temp_C = new int[local_n];
 
@@ -216,9 +219,7 @@ void Sort(int local_A[], int local_n, int my_rank, int p, MPI_Comm comm)
    free(temp_C);
 } /* Sort */
 
-/*-------------------------------------------------------------------
- * Only called by process 0
- */
+
 void Print_list(int local_A[], int local_n, int rank)
 {
    cout << rank << " : ";
