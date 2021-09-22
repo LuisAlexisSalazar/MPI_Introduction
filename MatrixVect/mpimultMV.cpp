@@ -1,5 +1,5 @@
 // *Compilar
-// mpiCC -g -o main mpioddEven.cpp
+// mpiCC -g -o main mpimultMV.cpp
 // ?Index determina las filas y columnas de la matrix [n*n]  [1024, 2048, 4096, 8192, 16384]
 // *Ejecución
 // mpiexec -n <p> ./main <index>
